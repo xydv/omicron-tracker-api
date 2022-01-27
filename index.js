@@ -1,23 +1,87 @@
+const PORT = process.env.PORT || 8000;
 const express = require("express");
-const Datastore = require("nedb");
+const axios = require("axios");
+const cheerio = require("cheerio");
 const app = express();
-const db = new Datastore("database.db");
-db.loadDatabase();
-app.use(express.json());
-app.get("/", (req, res) => {
-  db.find({}, (error, docs) => {
-    // console.log(docs);
-    res.status(200).send(docs);
+
+// const newspapers = [
+//   {
+//     name: "cityam",
+//     address: "https://newsnodes.com/omicron_tracker/",
+//     base: "",
+//   },
+// ];
+
+const articles = [];
+
+// newspapers.forEach((newspaper) => {
+axios.get("https://newsnodes.com/omicron_tracker/").then((response) => {
+  const html = response.data;
+  // console.log(html);
+  const $ = cheerio.load(html);
+
+  // $("tbody", html).each(function () {
+  // console.log(this);
+  // console.log(this.name);
+  // const newhtml = this;
+  // articles.push(newhtml);
+
+  // });
+  // });
+  // });
+  // get country
+  // var countries = [];
+  // $("#datatab a").each(function () {
+  //   countries.push($(this).text().trim());
+  // });
+  // // console.log(countries);
+  // const fcountry = countries.filter((country) => {
+  //   return country != "source";
+  // });
+  // get cases
+  var cases = [];
+  $("#datatab .u-text-r").each(function () {
+    cases.push($(this).text().trim());
   });
+  const fcases = cases.filter((cse) => {
+    //cse short for case because case is taken
+    return cse != "" && cse != "-" && !cse.includes("%") && cse !="source" && !cse.includes("(");
+  });
+
+  app.get("/", (req, res) => {
+    // res.send(fcountry.slice(0, 150));
+    res.send(fcases);
+  });
+
+  // app.get("/news/:newspaperId", (req, res) => {
+  //   const newspaperId = req.params.newspaperId;
+
+  //   const newspaperAddress = newspapers.filter(
+  //     (newspaper) => newspaper.name == newspaperId
+  //   )[0].address;
+  //   const newspaperBase = newspapers.filter(
+  //     (newspaper) => newspaper.name == newspaperId
+  //   )[0].base;
+
+  //   axios
+  //     .get(newspaperAddress)
+  //     .then((response) => {
+  //       const html = response.data;
+  //       const $ = cheerio.load(html);
+  //       const specificArticles = [];
+
+  //       $('a:contains("climate")', html).each(function () {
+  //         const title = $(this).text();
+  //         const url = $(this).attr("href");
+  //         specificArticles.push({
+  //           title,
+  //           url: newspaperBase + url,
+  //           source: newspaperId,
+  //         });
+  //       });
+  //       res.json(specificArticles);
+  //     })
+  //     .catch((err) => console.log(err));
 });
-// Get favicon
-app.get("/favicon.ico", (req, res) => res.status(204));
-app.post("/", (req, res) => {
-  res.status(200).send("Posted!!");
-});
-// Listen Only For Development
-app.listen(process.env.PORT, () => {
-  console.log("Started!!");
-});
-// Deta Uses Exports
-// module.exports = app;
+
+app.listen(PORT, () => console.log(`server running on PORT ${PORT}`));
