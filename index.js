@@ -10,6 +10,8 @@ app.get("/", (req, res) => {
     res.status(200).send(docs);
   });
 });
+// Get favicon
+app.get("/favicon.ico", (req, res) => res.status(204));
 app.post("/", (req, res) => {
   res.status(200).send("Posted!!");
 });
