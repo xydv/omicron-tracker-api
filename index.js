@@ -24,15 +24,15 @@ axios.get("https://newsnodes.com/omicron_tracker/").then((response) => {
   for (let index = 0; index < numCountries; index++) {
     // Object Create
     let object = {
-      countryName: countries[index],
-      noOfCase: cases[index],
+      country: countries[index],
+      cases: cases[index],
     };
     finaljson.push(object);
   }
   // Create A `/` Endpoint
   app.get("/", (req, res) => {
-    res.send(finaljson);
+    res.send(finaljson.slice(1, 151));
   });
 });
 // Listen App!!
-app.listen(PORT, () => console.log(`server running on PORT ${PORT}`));
+app.listen(PORT, () => console.log(`server running on port ${PORT}`));

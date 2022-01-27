@@ -1,3 +1,4 @@
 https://stackoverflow.com/questions/49132220/iterate-through-an-html-table-using-cheerio
 https://www.youtube.com/watch?v=GK4Pl-GmPHk
 https://newsnodes.com/omicron_tracker/
+https://www.youtube.com/watch?v=LoziivfAAjE
