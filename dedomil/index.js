@@ -17,8 +17,8 @@ app.post("/", (req, res) => {
   res.status(200).send("Posted!!");
 });
 // Listen Only For Development
-// app.listen(3000, () => {
-//   console.log("Started!!");
-// });
+app.listen(3000, () => {
+  console.log("Started!!");
+});
 // Deta Uses Exports
-module.exports = app;
+// module.exports = app;
