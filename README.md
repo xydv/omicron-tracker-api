@@ -50,4 +50,4 @@ I/We Are Not Responsible For Any Wrong Data, This Data Is Coming From A Source :
 ## Sources :-
 See [sources.txt](https://github.com/icancodebeauty/omicron-tracker-api/blob/main/sources.txt)
 ## Deployed App :-
-https://omicron-tracking-api.herokuapp.com/
+https://omicron.deta.dev/
