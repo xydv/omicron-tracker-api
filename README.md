@@ -3,7 +3,7 @@ A Simple API For Tracking Omicron Variant (COVID)!!.
 ## Note :-
 I/We Are Not Responsible For Any Wrong Data, This Data Is Coming From A Source :- https://newsnodes.com/omicron_tracker/
 ## Sample Code :-
-```
+```json
 [
     {
         "country": "United Kingdom",
